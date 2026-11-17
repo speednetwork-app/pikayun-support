@@ -86,6 +86,7 @@
 <p>服务端保存必要的订阅绑定、验签结果和交易记录，用于开通、恢复、对账及处理退款争议；收到的 Apple 签名通知加密保存。购买尝试、取消、待确认及验证结果会记录，用于恢复中断购买和防止重复下单。交易资料不用于广告追踪。退出登录或卸载不会删除这些服务端资料，也不会自动停止续费；你可以在 Apple 的订阅设置中管理或取消续订。</p>
 <p>选择记住同一线路的风险确认后，账号与线路配置的摘要保存在本机钥匙串中，不保存该线路密码或完整配置，不上传服务器。
 退出登录后保留，删除该账号时清除。1.6.5（33）及之后的构建可在「我的 → 隐私与数据」清除；1.6.5（32）的入口为「关于与帮助 → 连接诊断」。记住确认不代表服务器证书已验证。</p>
+<p>1.6.5（35）起，兼容连接弹窗提供可选的「记住当前账号所有 HY2 线路的风险确认」，默认不勾选。仅在你主动勾选并继续后，本机才保存账号摘要和确认范围；此确认允许当前账号在本机跳过所有现有、以后新增或配置变更的 HY2 线路的服务器证书校验，不再逐条询问。不会保存或上传线路密码、完整配置；旧版逐条确认不会自动升级为全部线路确认。可在「我的 → 隐私与数据」清除，删除该账号时也会清除。流量加密不等于服务器身份已验证，仍存在服务器被冒充或中间人攻击的风险。</p>
 <p>本机仅保留最近一次 VPN 连接的阶段、时间、错误分类和收发计数，24 小时后过期。
 诊断不记录密码、订阅链接或访问的网站地址。1.6.5（33）及更早构建不自动上传；1.6.5（32）提供主动复制给技术支持的入口，1.6.5（33）起不再展示该诊断面板。</p>
 <p><strong>1.6.5（34）起的可选连接失败诊断：</strong>默认关闭。只有在你明确启用后，App 才会在 VPN 连接失败或意外断开时，将随机排查编号、线路编号、协议、App 版本与构建号、固定失败阶段和错误分类、耗时、兼容模式、可选系统原因码及至多 8 条固定握手事件代码，经已登录 HTTPS 接口发送至 api.pikayun.com，供技术支持排查。不上传原始错误文本、账号邮箱、用户或设备标识、密码、令牌、完整配置、订阅地址、访问内容、目标地址或收发流量计数。接口通过现有登录凭证验证上报权限，但诊断记录不写入账号标识；现有 API 的认证及访问日志机制不因此改变。该诊断不用于广告或跨应用跟踪，不出售或向第三方提供 VPN 服务数据。</p>
@@ -193,6 +194,7 @@ full configuration. It is not uploaded. It survives sign-out, is removed when
 that account is deleted, and can be cleared in Account → Privacy &amp; Data in
 build 1.6.5 (33) and later. In build 1.6.5 (32), use About &amp; Help → Connection Diagnostics.
 Remembering confirmation does not mean the server certificate was verified.</p>
+<p>Build 1.6.5 (35) adds an optional, unchecked-by-default choice to remember risk acceptance for all HY2 lines for the current account. Only checking it and continuing saves an account digest and scope on this device. This explicitly allows skipping server-certificate verification for that account's existing, future and changed HY2 configurations without per-line prompts. No line passwords or full configurations are stored or uploaded. Earlier per-line choices are not automatically expanded. Clear it in Account → Privacy &amp; Data; deleting the account also clears it. Encryption does not authenticate the server, and impersonation or interception remains possible.</p>
 <p>Only the most recent VPN connection's phases, times, error categories and
 transfer counters are retained locally, expiring after 24 hours. Diagnostics do
 not record passwords, subscription URLs or visited website addresses. In build
