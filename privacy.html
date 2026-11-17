@@ -87,7 +87,9 @@
 <p>选择记住同一线路的风险确认后，账号与线路配置的摘要保存在本机钥匙串中，不保存该线路密码或完整配置，不上传服务器。
 退出登录后保留，删除该账号时清除。1.6.5（33）及之后的构建可在「我的 → 隐私与数据」清除；1.6.5（32）的入口为「关于与帮助 → 连接诊断」。记住确认不代表服务器证书已验证。</p>
 <p>本机仅保留最近一次 VPN 连接的阶段、时间、错误分类和收发计数，24 小时后过期。
-诊断不记录密码、订阅链接或访问的网站地址，不自动上传。1.6.5（32）提供主动复制给技术支持的入口；1.6.5（33）及之后的构建不再展示诊断面板或提供该复制入口。</p>
+诊断不记录密码、订阅链接或访问的网站地址。1.6.5（33）及更早构建不自动上传；1.6.5（32）提供主动复制给技术支持的入口，1.6.5（33）起不再展示该诊断面板。</p>
+<p><strong>1.6.5（34）起的可选连接失败诊断：</strong>默认关闭。只有在你明确启用后，App 才会在 VPN 连接失败或意外断开时，将随机排查编号、线路编号、协议、App 版本与构建号、固定失败阶段和错误分类、耗时、兼容模式、可选系统原因码及至多 8 条固定握手事件代码，经已登录 HTTPS 接口发送至 api.pikayun.com，供技术支持排查。不上传原始错误文本、账号邮箱、用户或设备标识、密码、令牌、完整配置、订阅地址、访问内容、目标地址或收发流量计数。接口通过现有登录凭证验证上报权限，但诊断记录不写入账号标识；现有 API 的认证及访问日志机制不因此改变。该诊断不用于广告或跨应用跟踪，不出售或向第三方提供 VPN 服务数据。</p>
+<p>不启用仍可使用 VPN，可在「我的 → 隐私与数据」随时关闭。失败上报在当前登录会话内限量、短暂重试，最多等待 15 分钟；退出登录、删除账户或关闭设置会清除尚未发送的队列。网络不可用或 App 终止时可能无法送达。服务端在受限目录中最多保留 7 天，随后清理；未保存账号关联，技术支持使用 App 显示的随机排查编号查找。</p>
 <h3>账户删除</h3>
 <p>登录后在「我的 → 删除账户」发起删除，核对说明、重新输入密码并确认。删除不是仅退出登录或暂时停用：将删除登录账户、邮箱和个人资料、非必要用量明细、工单内容，撤销全部设备的登录凭证与原订阅链接，终止该账号的剩余套餐使用权限。必要财务订单、交易资料及防重复认领标识按适用要求保留，以处理对账、退款和争议，不用于重新开通已删除账号或广告跟踪。数据清理遇到暂时故障时会重试，并在删除结果中说明。</p>
 <p><strong>删除账户不自动取消 Apple 订阅，也不自动退款。</strong>删除前请使用页面提供的 Apple 订阅管理入口取消不再需要的续订。尚有余额、佣金或正在处理的付款时，可在同一页面提交删除申请并查看进度；不会自动清零，结算完成后自动执行删除，无需重新申请。</p>
@@ -102,7 +104,7 @@
 <h2>五、我们不做的事</h2>
 <ul>
   <li>不含任何广告或广告 SDK</li>
-  <li>不含任何分析、埋点或崩溃统计工具</li>
+  <li>不含第三方分析、埋点或崩溃统计 SDK；仅提供上述由你自愿启用的最少连接失败诊断</li>
   <li>不进行用户追踪，不请求 App 跟踪透明度（ATT）授权</li>
   <li>不出售账号数据，不向广告商提供登录凭证或订阅地址；账号数据用于提供账号、VPN 及订阅服务</li>
   <li>注册不会自动购买套餐；Apple 订阅须由你在 Apple 购买页面确认</li>
@@ -193,10 +195,29 @@ build 1.6.5 (33) and later. In build 1.6.5 (32), use About &amp; Help → Connec
 Remembering confirmation does not mean the server certificate was verified.</p>
 <p>Only the most recent VPN connection's phases, times, error categories and
 transfer counters are retained locally, expiring after 24 hours. Diagnostics do
-not record passwords, subscription URLs or visited website addresses and are
-not uploaded automatically. Build 1.6.5 (32) lets you choose to copy them to
-technical support; build 1.6.5 (33) and later no longer displays the diagnostics
-panel or provides that copy action.</p>
+not record passwords, subscription URLs or visited website addresses. In build
+1.6.5 (33) and earlier they are not uploaded automatically. Build 1.6.5 (32)
+lets you choose to copy them to technical support; build 1.6.5 (33) removes that panel.</p>
+<p><strong>Optional connection-failure diagnostics from build 1.6.5 (34):</strong>
+Off by default. Only after you explicitly enable it, failed VPN connections or
+unexpected disconnections send a random report ID, node record ID, protocol,
+app version/build, fixed failure phase and error category, elapsed time,
+compatibility mode, optional system reason and up to eight fixed handshake
+event codes to api.pikayun.com over the authenticated HTTPS API for technical
+support. Reports exclude raw errors, email, user/device identifiers, passwords,
+tokens, full configuration, subscription URLs, traffic content, destination
+addresses and traffic counters. Existing login credentials authorize submission
+but account identifiers are not written into diagnostic records. Existing API
+authentication and access-log handling are unchanged. Diagnostics are not used
+for advertising or cross-app tracking. VPN service data is not sold or provided
+to third parties.</p>
+<p>You may use VPN without enabling diagnostics and disable them at any time in
+Account → Privacy &amp; Data. Bounded retries remain in the current sign-in session
+for at most 15 minutes; sign-out, account deletion or revocation clears unsent
+reports. Delivery may fail without network access or when the app terminates.
+Server records stay in a restricted directory for at most seven days before
+cleanup. No account association is stored; support locates reports using the
+random ID shown in the app.</p>
 <h3>Account deletion</h3>
 <p>After signing in, open Account → Delete Account, review the consequences, re-enter your password and confirm. This deletes the login account, email, personal profile, nonessential usage details and support content, revokes all device sessions and the old subscription link, and ends remaining service access. Necessary financial orders, transaction records and anti-replay identifiers are retained under applicable financial and dispute requirements, not to recreate the account or track you for advertising. Temporary cleanup failures are retried and reflected in the result.</p>
 <p><strong>Account deletion does not cancel Apple subscriptions or automatically issue a refund.</strong> Use the subscription-management link before deleting. Accounts with a balance, commission or an in-flight payment can submit a deletion request and check its progress in the app. Funds are not automatically forfeited; deletion completes automatically after settlement, without a second request.</p>
@@ -210,7 +231,7 @@ panel or provides that copy action.</p>
 <h2>5. What We Do Not Do</h2>
 <ul>
   <li>No advertising or ad SDKs</li>
-  <li>No analytics, telemetry or crash-reporting tools</li>
+  <li>No third-party analytics, telemetry or crash-reporting SDKs; only the optional minimal connection-failure diagnostics described above</li>
   <li>No user tracking; we never request App Tracking Transparency permission</li>
   <li>We do not sell account data or provide authentication credentials or subscription URLs to advertisers; account data supports account, VPN and subscription services</li>
   <li>Registration does not purchase a plan; Apple subscriptions require your confirmation on Apple's purchase screen</li>
